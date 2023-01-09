@@ -1,0 +1,55 @@
+<div class="container">
+  <h1>Sistema escolar</h1>
+
+  <div class="card">
+    <div class="card-body">
+      <!-- card in bootstrap to 3 columns-->
+      <div class="row">
+        <div class="col">
+          <label>Alumnos</label>
+          <select class="form-control" [(ngModel)]="alumnoSelected" (change)="onGetCalificaciones($event)">
+            <option *ngFor="let alumno of alumnos" [value]="alumno.id">{{alumno.nombre}}</option>
+          </select>
+        </div>
+        <div class="col">
+          <label>Materias</label>
+          <select class="form-control" [(ngModel)]="materiaSelected" (change)="onMateria($event)">
+            <option *ngFor="let materia of materias" [value]="materia.id"> {{materia.nombre}}</option>
+          </select>
+        </div>
+        <div class="col">
+          <label>Calificación</label>
+          <!-- input to save value number in angualr {calificacion}-->
+          <input type="number" min="0" max="10" class="form-control" [(ngModel)]="calificacionNumber" />
+           </div>
+        <div class="col">
+          <label>Acciones</label><br>
+          <!-- button to call onCalificacionAlumno to value calificacion -->
+          <button [disabled]="!buttonSave" class="btn btn-primary" (click)="onCalificacionAlumno(calificacionNumber)">{{labelButton}}</button>
+
+        </div>
+        <p></p>
+        <h3>Calificaciones</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Materia</th>
+              <th scope="col">Calificación</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let calificacion of calificaciones">
+              <td>{{calificacion.materia}}</td>
+              <td>{{calificacion.calificacion}}</td>
+              <td>
+                 <button class="btn btn-danger" (click)="onDeleteCalificacion(calificacion.id)">Eliminar</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+  </div>
+</div>
